@@ -1,0 +1,13 @@
+import { Router } from 'express';
+import { requireAuth } from '../middleware/auth.js';
+import { upload } from '../middleware/upload.js';
+import { addReview, createRecipe, deleteReview, getRecipe, listRecipes, updateRecipe, toggleLike } from '../controllers/recipeController.js';
+const router = Router();
+router.get('/', listRecipes);
+router.get('/:id', getRecipe);
+router.post('/', requireAuth, upload.array('images', 12), createRecipe);
+router.put('/:id', requireAuth, updateRecipe);
+router.post('/:id/like', requireAuth, toggleLike);
+router.post('/:id/reviews', requireAuth, addReview);
+router.delete('/:id/reviews/:reviewId', requireAuth, deleteReview);
+export default router;

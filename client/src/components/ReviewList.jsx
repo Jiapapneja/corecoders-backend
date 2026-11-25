@@ -1,0 +1,4 @@
+import { imageUrl } from '../lib/api.js';
+export default function ReviewList({ reviews }) {
+  return <div className="space-y-4">{reviews.length ? reviews.map(r => <div key={r._id} className="border-b border-black/5 pb-4"><div className="flex items-center justify-between"><div><p className="font-semibold">{r.userId?.name || 'Anonymous'}</p><p className="text-xs text-black/45">{new Date(r.createdAt).toLocaleDateString()}</p></div><span className="pill">{'★'.repeat(r.rating)}</span></div><p className="mt-2 text-sm leading-6 text-black/70">{r.comment}</p>{r.photos?.length > 0 && <div className="mt-2 flex gap-2">{r.photos.map(p => <img key={p} src={imageUrl(p,300)} loading="lazy" className="h-16 w-16 rounded-lg object-cover" alt="Review"/>)}</div>}</div>) : <p className="text-sm text-black/45">No reviews yet. Be the first to review this recipe.</p>}</div>;
+}
